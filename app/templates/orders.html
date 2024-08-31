@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block home %}
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        .container {
+            padding: 60px 20px;
+            background-color: #1a1a1a;
+            border-radius: 15px;
+            box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.7);
+        }
+
+        h3 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            color: #ff6347;
+            text-align: center;
+            border-bottom: 2px solid #ff6347;
+            padding-bottom: 10px;
+        }
+
+        .orders-section {
+            padding: 20px;
+            background-color: #1a1a1a;
+            border-radius: 15px;
+        }
+
+        .order-card {
+            padding: 20px;
+            background-color: #2a2a2a;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+
+        .order-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.7);
+        }
+
+        .order-card .order-number {
+            font-size: 24px;
+            color: #ff6347;
+            text-transform: uppercase;
+            border-bottom: 2px solid #ff6347;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .order-card .order-details {
+            font-size: 16px;
+            color: #cccccc;
+        }
+
+        .order-card .order-date {
+            font-size: 14px;
+            color: #999999;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+    </style>
+
+    <div class="container my-5">
+        <h3>Welcome, {{ request.user }}</h3>
+        <div class="orders-section">
+            {% for op in order_placed  %}
+                <div class="order-card">
+                    <div class="order-number">Order # {{forloop.counter}}</div>
+                    <div class="order-details">
+                        <h5>Product:  {{op.product.title}}</h5>
+                        <p>Quantity : {{op.quantity}}</p>
+                        <p>Price : {{op.product.discounted}}</p>
+                        <p>Total : {{op.total_cost}}</p>
+                        <p>Status : {{op.status}}</p>
+                    </div>
+                    <div class="order-date">Placed on: {{op.order_date}} - {{op.order_time}}</div>
+
+                </div>
+            {% endfor %}
+       </div>
+    </div>
+{% endblock home %}

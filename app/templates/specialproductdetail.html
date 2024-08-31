@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+{% load static %}
+{% block home %}
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #121212; /* Dark background */
+            color: #ffffff; /* Light text */
+        }
+
+        /* Product Detail Section */
+        .product-detail {
+            padding: 60px 20px;
+            background-color: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .product-detail .product-image {
+            flex: 1;
+            max-width: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .product-detail .product-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .product-detail .product-image img:hover {
+            transform: scale(1.05);
+        }
+
+        .product-detail .product-info {
+            flex: 1;
+            max-width: 500px;
+            text-align: left;
+        }
+
+        .product-detail .product-info h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            color: #ff6347; /* Highlight color */
+        }
+
+        .product-detail .product-info p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #cccccc;
+        }
+
+        .product-detail .product-info .price {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: #ff6347;
+            font-weight: bold;
+        }
+
+        .product-detail .product-info button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #ff6347;
+            color: #ffffff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .product-detail .product-info button:hover {
+            background-color: #e5533c;
+        }
+
+        /* Similar Products Section */
+        .similar-products {
+            padding: 60px 20px;
+            background-color: #121212;
+            text-align: center;
+        }
+
+        .similar-products h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            color: #ff6347;
+        }
+
+        .similar-products .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .similar-products .product-item {
+            background-color: #1a1a1a;
+            margin: 10px;
+            padding: 20px;
+            width: 250px;
+            border-radius: 10px;
+            transform: skew(-10deg);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .similar-products .product-item:hover {
+            transform: skew(0deg);
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .similar-products .product-item img {
+            width: 100%;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .similar-products .product-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .similar-products .product-item h3 {
+            margin: 15px 0;
+            font-size: 22px;
+            color: #ff6347;
+        }
+
+        .similar-products .product-item p {
+            font-size: 16px;
+            color: #cccccc;
+        }
+
+        .similar-products .product-item .price {
+            margin-top: 10px;
+            font-size: 20px;
+            color: #ff6347;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #1a1a1a;
+            padding: 20px;
+            text-align: center;
+            color: #f4f4f4;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+    </style>
+
+    <!-- Product Detail Section -->
+    <div class="product-detail">
+        <div class="product-image">
+            <img src="{{product.product_image.url}}" alt="Product Image">
+        </div>
+        <div class="product-info">
+            <h1>{{product.title}}</h1>
+            <p>{{product.discription}}</p>
+            
+            <div class="price">
+                Rs. {{product.discounted}}    
+
+                    
+              
+            </div>
+        {% if request.user.is_authenticated %}
+            <form action="/add-to-cart" class="d-inline">
+                <input type="hidden" name="prod_id" value={{product.id}}>
+                <button type="submit" class="btn btn-secondary px-3 m-1">Add to Cart</button>
+            </form>
+        {% else %}
+
+            <a href="{% url "userlogin" %}"><button>Add to Cart</button></a>
+            
+            
+            <a href="{% url "ourmenu" %}"><button class="px-3 m-1">Go TO Menu </button></a>
+        {% endif %}
+        </div>
+    </div>
+
+    <!-- Similar Products Section -->
+    <!-- Footer -->
+     
+    <div class="footer">
+        <p>&copy; 2024 Khan Baba Fri-Chicks & Pizza. All Rights Reserved.</p>
+    </div>
+{% endblock %}

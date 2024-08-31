@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    {% block mycss %} 
+    <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
+    {% endblock mycss %} 
+    <title>Khan Baba Fri-Chicks & Pizza </title>
+</head>
+<body> 
+   <div>
+    {% include "sidebar.html" %}
+   </div>    
+
+   <div class="container-fluid ">
+        {% block home %}{% endblock home %}
+   </div>
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/all.min.js' %}"></script>
+    <script src="{% static "js/myajax.js" %}"></script>
+</body>
+</html>

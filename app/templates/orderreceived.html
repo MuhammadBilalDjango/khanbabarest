@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load static %}
+{% block home %}
+ <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #121212; /* Dark background */
+            color: #ffffff; /* Light text */
+            text-align: center;
+        }
+
+        /* Header */
+        .header {
+            background-color: #1a1a1a;
+            padding: 20px;
+            text-align: center;
+            color: #ff6347;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+
+        /* Order Received Section */
+        .order-received {
+            padding: 60px 20px;
+            background-color: #1a1a1a;
+            text-align: center;
+        }
+
+        .order-received h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #ff6347;
+            text-transform: uppercase;
+        }
+
+        .order-received p {
+            font-size: 18px;
+            margin-bottom: 40px;
+            color: #cccccc;
+        }
+
+        .order-summary {
+            background-color: #2a2a2a;
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .order-summary h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: #ff6347;
+        }
+
+        .order-summary p {
+            font-size: 16px;
+            margin: 5px 0;
+            color: #cccccc;
+        }
+
+        .order-summary .total {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #ff6347;
+        }
+
+        /* Button */
+        .order-received button {
+            padding: 10px 20px;
+            font-size: 18px;
+            color: #ffffff;
+            background-color: #ff6347;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .order-received button:hover {
+            background-color: #e5533c;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #1a1a1a;
+            padding: 20px;
+            text-align: center;
+            color: #f4f4f4;
+            margin-top: 40px;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+    </style>
+
+    <!-- Header -->
+    <div class="header">
+        <h1>Khan Baba Fri-Chicks & Pizza</h1>
+    </div>
+
+    <!-- Order Received Section -->
+    <div class="order-received">
+        <h2>Order Received!</h2>
+        <p>Thank you for your order. Your delicious meal is on its way!</p>
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2024 Khan Baba Fri-Chicks & Pizza. All Rights Reserved.</p>
+    </div>
+
+
+{% endblock home %}

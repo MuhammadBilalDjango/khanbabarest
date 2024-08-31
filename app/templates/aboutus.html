@@ -1,0 +1,252 @@
+{% include "base.html" %}
+{% load static %}
+{% block about %}
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #121212; /* Dark background */
+            color: #ffffff; /* Light text */
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 50vh;
+            background: url('{% static "images/khanbaba2.jpg" %}') no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* About Us Section */
+        .about-us {
+            padding: 60px 20px;
+            background-color: #1a1a1a;
+            text-align: center;
+        }
+
+        .about-us h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            color: #ff6347;
+        }
+
+        .about-us .content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px; /* Added spacing between content */
+        }
+
+        .about-us .content-item {
+            background-color: #2a2a2a;
+            padding: 20px;
+            width: 300px;
+            border-radius: 10px;
+            transform: skew(-10deg);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .about-us .content-item:hover {
+            transform: skew(0deg) scale(1.05);
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .about-us .content-item img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .about-us .content-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .about-us .content-item h3 {
+            margin: 15px 0;
+            font-size: 22px;
+            color: #ff6347;
+        }
+
+        .about-us .content-item p {
+            font-size: 16px;
+            color: #cccccc;
+        }
+
+        /* Mission and Vision Section */
+        .mission-vision {
+            padding: 60px 20px;
+            background-color: #121212;
+            text-align: center;
+        }
+
+        .mission-vision h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            color: #ff6347;
+        }
+
+        .mission-vision .mission,
+        .mission-vision .vision {
+            background-color: #1a1a1a;
+            padding: 40px;
+            margin: 10px 0;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .mission-vision .mission:hover,
+        .mission-vision .vision:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .mission-vision p {
+            font-size: 18px;
+            color: #cccccc;
+            margin: 0;
+        }
+
+        /* Review Form Section */
+        .review-form {
+            padding: 60px 20px;
+            background-color: #1a1a1a;
+            text-align: center;
+        }
+
+        .review-form h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            color: #ff6347;
+        }
+
+        .review-form form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #2a2a2a;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .review-form form input,
+        .review-form form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #333;
+            color: #ffffff;
+        }
+
+        .review-form form input:focus,
+        .review-form form textarea:focus {
+            outline: none;
+            background-color: #444;
+        }
+
+        .review-form form button {
+            background-color: #ff6347;
+            color: #ffffff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease;
+        }
+
+        .review-form form button:hover {
+            background-color: #ff4500;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #1a1a1a;
+            padding: 20px;
+            text-align: center;
+            color: #f4f4f4;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+    </style>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>About Us</h1>
+    </div>
+
+    <!-- About Us Section -->
+    <div class="about-us">
+        <h2>Our Story</h2>
+        <div class="content">
+            <div class="content-item">
+                <img src="{% static 'images/c6.jpg' %}" alt="Founder">
+                <h3>Our Founder</h3>
+                <p>With over two decades of experience in the food industry, our founder has built a brand known for its quality and authenticity.</p>
+            </div>
+            <div class="content-item">
+                <img src="{% static 'images/c6.jpg' %}" alt="Team">
+                <h3>Our Team</h3>
+                <p>Our passionate team of chefs and staff are dedicated to delivering the best dining experience for our customers.</p>
+            </div>
+            <div class="content-item">
+                <img src="{% static 'images/c6.jpg' %}" alt="Values">
+                <h3>Our Values</h3>
+                <p>We believe in using only the freshest ingredients, providing excellent service, and giving back to the community.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mission and Vision Section -->
+    <div class="mission-vision">
+        <h2>Our Mission & Vision</h2>
+        <div class="mission">
+            <h3>Mission</h3>
+            <p>To create unforgettable dining experiences by serving exceptional food with a focus on quality, service, and sustainability.</p>
+        </div>
+        <div class="vision">
+            <h3>Vision</h3>
+            <p>To be a leader in the restaurant industry, known for innovation, customer satisfaction, and a commitment to making a positive impact on society.</p>
+        </div>
+    </div>
+
+    <!-- Review Form Section -->
+    <div class="review-form">
+        <h2>Leave a Review</h2>
+        <h2>Your FeedBack Is Useful For Us</h2>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <input type="text" name="subject" placeholder="Subject" required>
+            <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2024 Khan Baba Fri-Chicks & Pizza. All Rights Reserved.</p>
+    </div>
+
+{% endblock about %}

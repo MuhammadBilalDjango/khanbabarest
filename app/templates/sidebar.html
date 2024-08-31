@@ -1,0 +1,168 @@
+{% load static %}
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        background-color: #121212; /* Dark background */
+        color: #ffffff; /* Light text for better contrast */
+    }
+    
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -250px;
+        width: 250px;
+        height: 100%;
+        background: #1a1a1a; /* Darker sidebar background */
+        transition: 0.4s ease-in-out;
+        z-index: 1000;
+        overflow-y: auto;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    }
+    
+    .sidebar header {
+        margin-top: 29px;
+        font-size: 18px;
+        color: #f4f4f4; /* Light text for header */
+        text-align: center;
+        line-height: 50px;
+        background: #222; /* Darker background for header */
+        user-select: none;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+    
+    .sidebar ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+    
+    .sidebar ul li {
+        margin-bottom: 5px;
+    }
+    
+    .sidebar ul a {
+        display: block;
+        width: 100%;
+        line-height: 45px;
+        font-size: 14px;
+        color: #f4f4f4; /* Light text for links */
+        padding-left: 25px;
+        box-sizing: border-box;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: padding-left 0.3s ease, background 0.3s ease;
+    }
+    
+    .sidebar ul a i {
+        margin-right: 10px;
+        color: #ff6347; /* Light icon color */
+    }
+    
+    .sidebar ul a:hover {
+        padding-left: 35px;
+        background-color: #333; /* Darker hover effect */
+    }
+    
+    #check {
+        display: none;
+    }
+    
+    label #btn {
+        position:fixed;
+        top: 50%;
+        left: 10px;
+        transform: translateY(-50%);
+        cursor: pointer;
+        background: #1a1a1a; /* Match sidebar color */
+        border-radius: 3px;
+        color: #f4f4f4;
+        padding: 8px 10px;
+        font-size: 22px;
+        transition: all 0.4s;
+        z-index: 1;
+    }
+    
+    
+    
+    label #cancel {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        cursor: pointer;
+        background: #1a1a1a;
+        border-radius: 3px;
+        color: #f4f4f4;
+        padding: 8px 10px;
+        font-size: 22px;
+        transition: all 0.4s;
+        z-index: 1101;
+        display: none;
+    }
+    
+    #check:checked ~ .sidebar {
+        left: 0;
+    }
+    
+    #check:checked ~ label #btn {
+        display: none;
+    }
+    
+    #check:checked ~ .sidebar label #cancel {
+        display: block;
+    }
+    
+    @media screen and (max-width: 1200px) {
+        .sidebar {
+            width: 100%;
+            left: -100%;
+        }
+    
+        #check:checked ~ .sidebar {
+            left: 0;
+        }
+    
+        .sidebar label #cancel {
+            right: 15px;
+        }
+    }
+</style>
+
+
+
+
+
+
+
+
+
+<input type="checkbox" id="check">
+<label for="check">
+    <i class="fa-solid fa-bars" id="btn"></i>
+</label>
+<div class="sidebar">
+    <label for="check">
+        <i class="fas fa-times" id="cancel"></i>
+    </label>
+    <header>Khan Baba <br> Fri-Chicks & Pizza</header>
+    <ul>
+        
+        <li><a href="{% url "home" %}"><i class="fa-solid fa-house"></i> Home</a></li>
+        <li><a href="{% url "ourmenu" %}"><i class="fa-solid fa-bars"></i> Menu</a></li>
+        <li><a href="{% url "specialdeals" %}"><i class="fa-solid fa-star"></i> Special Deals</a></li>
+        <li><a href="{% url "about" %}"><i class="fa-regular fa-address-book"></i> Contact Us</a></li>
+        {% if request.user.is_authenticated %}
+        <li><a href="{% url "profile" %}"><i class="fa-regular fa-user"></i> Profile</a></li>
+        <li><a href="{% url "showcart" %}"><i class="fa-solid fa-cart-shopping"></i> Cart</a></li>
+        <li><a href="{% url "orders" %}"><i class="fa-solid fa-cart-shopping"></i> Orders</a></li>
+        <li><a href="{% url "logout" %}"><i class="fa-solid fa-right-to-bracket"></i> Logout</a></li>
+        {% else %}
+        <li><a href="{% url "userlogin" %}"><i class="fa-solid fa-right-to-bracket"></i> Login</a></li>
+        <li><a href="{% url "register" %}"><i class="fa-solid fa-user-plus"></i> Signup</a></li>
+        {% endif %}
+    </ul>
+</div>

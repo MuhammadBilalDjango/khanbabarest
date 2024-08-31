@@ -1,0 +1,258 @@
+{% include "base.html" %}
+{% load static %}
+{% block content %}
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #121212; /* Dark background */
+            color: #ffffff; /* Light text */
+        }
+
+        /* Menu Section */
+        .menu-page {
+            padding: 60px 20px;
+            background-color: #1a1a1a;
+            text-align: center;
+        }
+        
+        .menu-page h1 {
+            font-size: 50px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            color: #ff6347;
+        }
+
+        .menu-category {
+            margin-bottom: 60px;
+        }
+        
+        .menu-category h2 {
+            font-size: 36px;
+            color: #ff6347;
+            margin-bottom: 30px;
+        }
+        
+        .menu-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+       .menu-item {
+    background-color: #2a2a2a;
+    margin: 10px;
+    padding: 20px;
+    width: 250px;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, z-index 0.3s;
+    transform: scale(1); /* Default scale */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.menu-item:hover {
+    transform: scale(1.25); /* Increase the scale to 1.25 on hover */
+    z-index: 10; /* Bring the hovered item to the front */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.menu-item img {
+    width: 100%;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.menu-item:hover img {
+    transform: scale(1.1); /* Slightly zoom the image as well */
+}
+        
+        .menu-item h3 {
+            margin: 12px 0;
+            font-size: 22px;
+            color: #ff6347;
+        }
+        
+        .menu-item p {
+            font-size: 14px;
+            color: #cccccc;
+        }
+        
+        .menu-item .price {
+            margin-top: 10px;
+            font-size: 20px;
+            color: #ff6347;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #1a1a1a;
+            padding: 20px;
+            text-align: center;
+            color: #f4f4f4;
+        }
+        
+        .footer p {
+            margin: 0;
+        }
+        button a{
+            text-decoration:none;
+            color:whitesmoke;
+        }
+        button a:hover{
+            text-decoration:none;
+            color:white;
+        }
+        button:hover{
+            border:1px solid black;
+            color:black;
+            background-color:#042331;
+        }
+
+        .gocart button {
+            
+            position: fixed;
+            padding: 10px 14px;
+            font-size: 18px;
+            color: #ffffff;
+            background-color: #ff6347;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border-radius: 5px;
+            width: auto;
+            z-index: 1;
+        }
+
+        .gocart button:hover {
+            background-color: #e5533c;
+        }
+
+    </style>
+    {% if request.user.is_authenticated %}
+        <div class="gocart"> 
+            <a href="{% url "showcart" %}"><button>Check <i class="fa-solid fa-cart-shopping"></i> </button></a>
+        </div>
+    {% endif %}
+    <!-- Menu Section -->
+    <div class="menu-page" id="menu">
+        <h1>Our Menu</h1>
+        
+        <!-- Pizza Section -->
+        <div class="menu-category" id="pizza">
+            <h2>Pizza</h2>
+            <div class="menu-items">
+                {% for p in pizza  %}
+
+                    <a href="{% url "productdetail" p.id %}" style="text-decoration:none">
+                            <div class="menu-item">
+                                <img src="{{p.product_image.url}}" alt="Pepperoni Pizza">
+                                <h3>{{p.title}}</h3>
+                                <p>{{p.discription}}</p>
+                                <div class="price alert">Rs. {{p.discounted}}</div>
+                                <button class="btn btn-danger btn-outline-danger shadow"><a href="{% url "showcart" %}">Add to Cart</a></button>
+                                <button class="btn btn-danger btn-outline-danger shadow"><a href="{% url "productdetail" p.id %}">Details</a></button>
+                            </div>
+                    </a>
+                
+                {% endfor %}
+
+            </div>
+        </div>
+
+        <!-- Burger Section -->
+        <div class="menu-category" id="burgers">
+            <h2>Burgers</h2>
+            <div class="menu-items">
+                {% for b in burger  %}
+
+                <a href="{% url "productdetail" b.id %}" style="text-decoration:none">
+                        <div class="menu-item">
+                            <img src="{{b.product_image.url}}" alt="Pepperoni Pizza">
+                            <h3>{{b.title}}</h3>
+                            <p>{{b.discription}}</p>
+                            <div class="price alert">Rs. {{b.discounted}}</div>
+                            <button class="btn btn-danger btn-outline-danger shadow"><a href="">Add to Cart</a></button>
+                            <button class="btn btn-danger btn-outline-danger shadow"><a href="">Details</a></button>
+                        </div>
+                </a>
+            
+            {% endfor %}
+                
+            </div>
+        </div>
+
+        <!-- Fries Section -->
+        <div class="menu-category" id="fries">
+            <h2>Fries</h2>
+            <div class="menu-items">
+                {% for fr in fries  %}
+
+                    <a href="{% url "productdetail" fr.id %}" style="text-decoration:none">
+                            <div class="menu-item">
+                                <img src="{{fr.product_image.url}}" alt="Pepperoni Pizza">
+                                <h3>{{fr.title}}</h3>
+                                <p>{{fr.discription}}</p>
+                               
+                                <div class="price alert">Rs. {{fr.discounted}}</div>
+                                <button class="btn btn-danger btn-outline-danger shadow"><a href="">Add to Cart</a></button>
+                                <button class="btn btn-danger btn-outline-danger shadow"><a href="">Details</a></button>
+                            </div>
+                    </a>
+                
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Cakes Section -->
+        <div class="menu-category" id="cakes">
+            <h2>Cakes</h2>
+            <div class="menu-items">
+                {% for cc in cake  %}
+
+                <a href="{% url "productdetail" cc.id %}" style="text-decoration:none">
+                        <div class="menu-item">
+                            <img src="{{cc.product_image.url}}" alt="Pepperoni Pizza">
+                            <h3>{{cc.title}}</h3>
+                            <p>{{cc.discription}}</p>
+                            <div class="price alert">Rs. {{cc.discounted}}</div>
+                            <button class="btn btn-danger btn-outline-danger shadow"><a href="">Add to Cart</a></button>
+                            <button class="btn btn-danger btn-outline-danger shadow"><a href="">Details</a></button>
+                        </div>
+                </a>
+            
+            {% endfor %}
+            </div>
+        </div>
+
+        <!-- Ice Cream Section -->
+        <div class="menu-category" id="icecream">
+            <h2>Ice Cream Flavors</h2>
+            <div class="menu-items">
+                {% for ic in icecream  %}
+
+                <a href="{% url "productdetail" ic.id %}" style="text-decoration:none">
+                        <div class="menu-item">
+                            <img src="{{ic.product_image.url}}" alt="Pepperoni Pizza">
+                            <h3>{{ic.title}}</h3>
+                            <p>{{ic.discription}}</p>
+                            <br>
+                            <div class="price alert">Rs. {{ic.discounted}}</div>
+                            <button class="btn btn-danger btn-outline-danger shadow"><a href="">Add to Cart</a></button>
+                            <button class="btn btn-danger btn-outline-danger shadow"><a href="">Details</a></button>
+                        </div>
+                </a>
+            
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <div class="footer" id="contact">
+        <p>&copy; 2024 Khan Baba Fri-Chicks & Pizza . All Rights Reserved.</p>
+    </div>
+{% endblock content %}

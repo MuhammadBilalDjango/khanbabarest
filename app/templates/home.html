@@ -1,0 +1,422 @@
+{% include "base.html" %}
+{% load static %}
+{% block home %}
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #121212; /* Dark background */
+            color: #ffffff; /* Light text */
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: url('{% static "images/khanbaba2.jpg" %}') no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .hero button {
+            padding: 10px 20px;
+            font-size: 18px;
+            color: #ffffff;
+            background-color: #ff6347; /* Button color */
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .hero button:hover {
+            background-color: #e5533c; /* Darker button on hover */
+        }
+        /* Menu Section */
+        .menu-section {
+            padding: 60px 20px;
+            background-color: #1a1a1a;
+            text-align: center;
+        }
+        
+        .menu-section h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            color: #ff6347;
+        }
+        
+        .menu-section .menu-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .menu-section .menu-item {
+            background-color: #2a2a2a;
+            margin: 10px;
+            padding: 20px;
+            width: 250px;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            transform: skew(-10deg);
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .menu-section .menu-item:hover {
+            transform: skew(0deg);
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .menu-section .menu-item img {
+            width: 100%;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .menu-section .menu-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .menu-section .menu-item h3 {
+            margin: 15px 0;
+            font-size: 22px;
+            color: #ff6347;
+        }
+        
+        .menu-section .menu-item p {
+            font-size: 16px;
+            color: #cccccc;
+        }
+        
+     
+        /* Special Deals Section */
+        .special-deals {
+            padding: 60px 20px;
+            background-color: #121212;
+            text-align: center;
+        }
+        
+        .special-deals h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            color: #ff6347;
+        }
+        
+        .special-deals .deal {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px; /* Added spacing between the deal items */
+        }
+        
+        .special-deals .deal-item {
+            background-color: #1a1a1a;
+            margin: 10px;
+            padding: 20px;
+            width: 300px;
+            border-radius: 10px;
+            transform: skew(-10deg);
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .special-deals .deal-item:hover {
+            transform: skew(0deg) scale(1.25); /* Straightens and zooms in the card */
+            z-index: 1; /* To make sure the hovered item appears above others */
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .special-deals .deal-item:hover ~ .deal-item {
+            transform: skew(-10deg) scale(0.8); /* Keeps adjacent cards skewed and shrinks them */
+            opacity: 0.7; /* Reduces the opacity of adjacent cards */
+        }
+        
+        .special-deals .deal-item img {
+            width: 100%;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .special-deals .deal-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .special-deals .deal-item h3 {
+            margin: 15px 0;
+            font-size: 22px;
+            color: #ff6347;
+        }
+        
+        .special-deals .deal-item p {
+            font-size: 16px;
+            color: #cccccc;
+        }
+        
+        .special-deals .deal-item .price {
+            margin-top: 10px;
+            font-size: 20px;
+            color: #ff6347;
+        }
+
+        /* About Us */
+        .about-us {
+            padding: 60px 20px;
+            background-color: #1a1a1a;
+            text-align: center;
+        }
+        
+        .about-us h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            color: #ff6347;
+        }
+        
+        .about-us .team {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px; /* Added spacing between the team items */
+        }
+        
+        .about-us .team-item {
+            background-color: #2a2a2a;
+            margin: 10px;
+            padding: 20px;
+            width: 300px;
+            border-radius: 10px;
+            transform: skew(-10deg);
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .about-us .team-item:hover {
+            transform: skew(0deg) scale(1.25); /* Straightens and zooms in the card */
+            z-index: 1; /* To make sure the hovered item appears above others */
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .about-us .team-item:hover ~ .team-item {
+            transform: skew(-10deg) scale(0.8); /* Keeps adjacent cards skewed and shrinks them */
+            opacity: 0.7; /* Reduces the opacity of adjacent cards */
+        }
+        
+        .about-us .team-item img {
+            width: 100%;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .about-us .team-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .about-us .team-item h3 {
+            margin: 15px 0;
+            font-size: 22px;
+            color: #ff6347;
+        }
+        
+        .about-us .team-item p {
+            font-size: 16px;
+            color: #cccccc;
+        }
+
+        /* Google Map */ 
+        /* Google Map Section */
+        .map-section {
+            padding: 60px 20px;
+            background-color: #1a1a1a;
+            text-align: center;
+        }
+
+        .map-section h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            color: #ff6347;
+        }
+
+        .map-section iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Payment Section */
+        .payment-options {
+            padding: 60px 20px;
+            background-color: #1a1a1a;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .payment-options h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            color: #ff6347;
+        }
+
+        .payment-options .payment-list {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 0;
+        }
+
+        .payment-options .payment-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 18px;
+            color: #ffffff;
+            width: 120px;
+        }
+
+        .payment-options .payment-item img {
+            width: 80px;
+            height: auto;
+            margin-bottom: 10px;
+            filter: brightness(0) invert(1); /* Adjust image color to match dark theme */
+        }
+        /* Footer */
+        .footer {
+            background-color: #1a1a1a;
+            padding: 20px;
+            text-align: center;
+            color: #f4f4f4;
+        }
+        
+        .footer p {
+            margin: 0;
+        }
+    </style>
+
+
+    <!-- Hero Section -->
+    <div class="hero" id="home">
+        <div>
+        </div>
+    </div>
+
+    <!-- Menu Section -->
+    <div class="menu-section" id="menu">
+        <a href="{% url "ourmenu" %}" style="text-decoration:none;"><h2 class="btn btn-dark">Our Menu</h2></a>
+        <div class="menu-items">
+
+
+            {% for p in product  %}
+
+                <a href="{% url "productdetail" p.id %}" style="text-decoration:none;">
+                    <div class="menu-item">
+                        <img src="{{p.product_image.url}}" alt="Burger">
+                        <h3>{{p.title}}</h3>
+                        <div class="price btn btn-danger text-white">Rs. {{p.discounted}}</div>
+                    </div>
+                </a>
+            
+            {% endfor %}
+
+
+        </div>
+    </div>
+
+    <!-- Special Deals Section -->
+    <div class="special-deals" id="special-deals">
+        <h2>Special Deals</h2>
+        <div class="deal">
+          
+           {% for sp in special  %}
+           
+           
+                <a href="{% url "specialproductdetail" sp.id %}" style="text-decoration:none;">
+                        <div class="deal-item">
+                            <img src="{{sp.product_image.url}}" alt="Combo">
+                            <h3>{{sp.title}}</h3>
+                            <div class="row" style="justify-content:space-around;">
+                                <div class="price line-through"><strike>Rs. {{sp.price}}</strike></div>
+                                 <div class="price text-danger">Rs. {{sp.discount}}</div>
+                            </div>
+                            
+                        </div>
+                </a>         
+            {% endfor %}
+        </div>
+    </div>
+
+    <!--About Us Section-->
+    <div class="about-us" id="about-us">
+        <h2>About Us</h2>
+        <div class="team">
+            <div class="team-item">
+                <img src="{% static 'images/c6.jpg' %}" alt="Master Chef">
+                <h3>Master Chef</h3>
+                <p>Our Master Chef brings over 20 years of experience in gourmet cuisine.</p>
+            </div>
+            <div class="team-item">
+                <img src="{% static 'images/c6.jpg' %}" alt="Owner">
+                <h3>Owner</h3>
+                <p>The visionary behind Khan Baba, ensuring quality and authenticity.</p>
+            </div>
+        </div>
+    </div>
+    <!--Google Map-->
+    <div class="map-section" id="location">
+        <h2>Our Location</h2>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6827.793761409281!2d74.1001411846553!3d31.168136526610574!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39184f8f745b4b99%3A0x3473db22c1bd65a9!2sKhan%20Baba%20Fri-Chicks%20%26%20Pizza!5e0!3m2!1sen!2s!4v1723922303759!5m2!1sen!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+     <!-- Payment Options Section -->
+     <div class="payment-options" id="payment">
+        <h2>Payment Accepted Options</h2>
+        <div class="payment-list">
+            <div class="payment-item">
+                <i class="fab fa-cc-mastercard"></i>
+                <span>MasterCard</span>
+            </div>
+            <div class="payment-item">
+                <i class="fab fa-cc-visa"></i>
+                <span>Visa</span>
+            </div>
+            <div class="payment-item">
+                <i class="fas fa-mobile-alt"></i>
+                <span>JazzCash</span>
+            </div>
+            <div class="payment-item">
+                <i class="fas fa-wallet"></i>
+                <span>EasyPaisa</span>
+            </div>
+            <div class="payment-item">
+                <i class="fas fa-money-bill-wave"></i>
+                <span>Cash on Delivery</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer" id="contact">
+        <p>&copy; 2024 Khan Baba Fri-Chicks & Pizza. All Rights Reserved.</p>
+    </div>
+
+
+{% endblock home %}

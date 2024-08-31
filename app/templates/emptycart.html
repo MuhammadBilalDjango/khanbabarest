@@ -1,0 +1,71 @@
+{% include "base.html" %}
+{% load static %}
+{% block emptycart %}
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #121212; /* Dark background */
+            color: #ffffff; /* Light text */
+        }
+
+        .empty-cart {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+            text-align: center;
+        }
+
+        .empty-cart h3 {
+            font-size: 36px;
+            color: #ff6347;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .empty-cart p {
+            font-size: 18px;
+            color: #cccccc;
+        }
+
+        .empty-cart button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            color: #ffffff;
+            background-color: #ff6347; /* Button color */
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .empty-cart button:hover {
+            background-color: #e5533c; /* Darker button on hover */
+        }
+
+        .footer {
+            background-color: #1a1a1a;
+            padding: 20px;
+            text-align: center;
+            color: #f4f4f4;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+    </style>
+
+    <div class="empty-cart">
+        <div>
+            <h3>Your Cart is Empty</h3>
+            <p>Looks like you haven't added any items to your cart yet.</p>
+            <a href="{% url 'ourmenu' %}">
+                <button>Browse Our Menu</button>
+            </a>
+        </div>
+    </div>
+{% endblock emptycart %}

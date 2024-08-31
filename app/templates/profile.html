@@ -1,0 +1,172 @@
+{% include "base.html" %}
+{% load static %}
+{% block profile %}
+
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        background-color: #121212; /* Dark background */
+        color: #ffffff; /* Light text */
+    }
+
+    /* Profile Section */
+    .profile-section {
+        padding: 60px 20px;
+        background-color: #1a1a1a;
+        text-align: center;
+    }
+
+    .profile-section h2 {
+        font-size: 36px;
+        margin-bottom: 40px;
+        text-transform: uppercase;
+        color: #ff6347;
+    }
+
+    .profile-card {
+        background-color: #2a2a2a;
+        padding: 40px;
+        margin: auto;
+        width: 60%;
+        border-radius: 15px;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        transform: skew(-5deg);
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .profile-card:hover {
+        transform: skew(0deg) scale(1.05);
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .profile-card img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .profile-card:hover img {
+        transform: scale(1.1);
+    }
+
+    .profile-card h3 {
+        margin-bottom: 10px;
+        font-size: 24px;
+        color: #ff6347;
+    }
+
+    .profile-card p {
+        font-size: 18px;
+        color: #cccccc;
+    }
+
+    .profile-card button {
+        background-color: #ff6347;
+        color: #ffffff;
+        cursor: pointer;
+    }
+
+    .profile-card button:hover {
+        background-color: #e5533c;
+        transform: scale(1.05);
+    }
+
+    /* Form Section */
+    .profile-form {
+        background-color: #1a1a1a;
+        padding: 40px;
+        border-radius: 15px;
+        margin-top: 20px;
+        width: 60%;
+        margin: auto;
+    }
+
+    .profile-form input, .profile-form button {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        border: none;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .profile-form input {
+        background-color: #2a2a2a;
+        color: #ffffff;
+    }
+
+    .profile-form input:focus {
+        background-color: #333333;
+        transform: scale(1.05);
+        outline: none;
+    }
+   
+
+    .profile-form button {
+        background-color: #ff6347;
+        color: #ffffff;
+        cursor: pointer;
+    }
+
+    .profile-form button:hover {
+        background-color: #e5533c;
+        transform: scale(1.05);
+    }
+
+    /* Success Message */
+    .success-message {
+        color: #28a745;
+        font-size: 18px;
+        margin-top: 20px;
+        opacity: 0;
+        transform: scale(0.9);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .success-message.show {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+</style>
+
+<!-- Profile Section -->
+<div class="profile-section" id="profile">
+    <h2>User Profile</h2>
+    <div class="profile-card">
+        <img src="{% static "images/profile.png" %}" alt="Profile Avatar">
+        <h3>{{ request.user }}</h3>
+    </div>
+</div>
+
+<!-- Form Section -->
+<div class="profile-form-section" id="edit-profile">
+    
+    <form class="profile-form" method="POST" enctype="multipart/form-data">
+            {% if messages %}
+                {% for message in messages  %}
+                    <p {% if message.tags %} class="alert alert-{{message.tags}} mb-3"{% endif %}>{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% csrf_token %}
+        {% for fm  in form  %}
+            <div class="form-group">
+                {{fm.label_tag}}{{fm}} <small class="text-danger">{{fm.errors|striptags}}</small>
+            </div>    
+        {% endfor %}
+        <button type="submit">Update Profile</button>
+
+        {% if form.non_field_errors %}
+            {% for error in form.non_field_errors  %}
+                <p class="text-danger">{{error}}</p>
+            {% endfor %}
+        {% endif %}
+    </form>
+</div>
+
+{% endblock profile %}

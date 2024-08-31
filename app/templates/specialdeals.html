@@ -1,0 +1,127 @@
+{% include "base.html" %}
+{% load static %}
+{% block special_deals %}
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #121212; /* Dark background */
+            color: #ffffff; /* Light text */
+        }
+
+        /* Special Deals Section */
+        .special-deals {
+            padding: 60px 20px;
+            background-color: #121212;
+            text-align: center;
+        }
+        
+        .special-deals h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            color: #ff6347;
+        }
+        
+        .special-deals .deal {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px; /* Added spacing between the deal items */
+        }
+        
+        .special-deals .deal-item {
+            background-color: #1a1a1a;
+            margin: 10px;
+            padding: 20px;
+            width: 300px;
+            border-radius: 10px;
+            transform: skew(-10deg);
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .special-deals .deal-item:hover {
+            transform: skew(0deg) scale(1.25); /* Straightens and zooms in the card */
+            z-index: 1; /* To make sure the hovered item appears above others */
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .special-deals .deal-item:hover ~ .deal-item {
+            transform: skew(-10deg) scale(0.8); /* Keeps adjacent cards skewed and shrinks them */
+            opacity: 0.7; /* Reduces the opacity of adjacent cards */
+        }
+        
+        .special-deals .deal-item img {
+            width: 100%;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .special-deals .deal-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .special-deals .deal-item h3 {
+            margin: 15px 0;
+            font-size: 22px;
+            color: #ff6347;
+        }
+        
+        .special-deals .deal-item p {
+            font-size: 16px;
+            color: #cccccc;
+        }
+        
+        .special-deals .deal-item .price {
+            margin-top: 10px;
+            font-size: 20px;
+            color: #ff6347;
+        }
+
+        /* Discounted Price */
+        .price {
+            font-size: 24px;
+            color: #ff6347;
+            margin: 10px 0;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #cccccc;
+            font-size: 18px;
+        }
+
+        .discounted-price {
+            color: #ff6347;
+            font-size: 24px;
+        }
+    </style>
+
+    <!-- Special Deals Section -->
+    <div class="special-deals" id="special-deals">
+        <h2>Special Deals</h2>
+            <div class="deal">
+            {% for s in special  %} 
+
+                <a href="{% url "specialproductdetail"  s.id %}  " style="text-decoration:none;">
+                    
+                        <div class="deal-item">
+                            <img src="{{s.product_image.url}}" alt="Pizza">
+                            <h3>{{s.title}}</h3>
+                            
+                            <div class="price">
+                                <span class="original-price price btn btn-danger text-white"><strike>Rs. {{s.actualprice}}</strike></span>
+                                <span class="discounted-price price btn btn-danger text-white">Rs. {{s.discounted}}</span>
+                            </div>
+                        </div>
+
+                    </a>
+            {% endfor %}
+
+        
+    </div>
+
+{% endblock special_deals %}
